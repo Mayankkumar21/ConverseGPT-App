@@ -1,6 +1,10 @@
 const axios = require('axios');
 
-document.getElementById('generateBtn').addEventListener('click', async () => {
+// Array to store conversation history
+let conversation_history = [];
+
+document.getElementById('generateBtn').addEventListener('click', async() => {
+    const modelName = document.getElementById('modelName').value;
     const prompt = document.getElementById('prompt').value;
     const responseContainer = document.getElementById('response');
     const loadingSpinner = document.getElementById('loadingSpinner');
@@ -8,16 +12,22 @@ document.getElementById('generateBtn').addEventListener('click', async () => {
     // Show loading spinner
     loadingSpinner.classList.remove('hidden');
 
+    // Add current prompt to conversation history
+    conversation_history.push(prompt);
+
+    // Combine all messages from the conversation history
+    const fullPrompt = conversation_history.join('\n');
+
     // Prepare the request data
     const requestData = {
-        model: 'gemma:2b',
+        model: modelName,
         stream: false,
-        prompt: prompt
+        prompt: fullPrompt // Use full prompt
     };
 
     try {
         const response = await axios.post('http://localhost:11434/api/generate', requestData);
-        
+
         const responseData = response.data;
 
         // Clear previous responses
@@ -41,6 +51,16 @@ document.getElementById('generateBtn').addEventListener('click', async () => {
     }
 });
 
+// Event listener for the Clear Conversation History button
+document.getElementById('clearHistoryBtn').addEventListener('click', () => {
+    // Clear conversation history
+    conversation_history = [];
+
+    // Clear prompt and response boxes
+    document.getElementById('prompt').value = '';
+    document.getElementById('response').innerHTML = '';
+});
+
 // Function to convert markdown to plain text
 function convertMarkdownToText(markdown) {
     // Remove asterisks from ** **
@@ -51,18 +71,11 @@ function convertMarkdownToText(markdown) {
 
     // Add newline before and after code blocks
     markdown = markdown.replace(/```([\s\S]+?)```/g, '\n$1\n');
-    
+
     // Return the formatted text
     return markdown;
 }
 
-
-
-
-
-
-
-// Function to simulate typing animation
 // Function to simulate typing animation
 async function typeWriter(element, text) {
     const chunkSize = 50; // Adjust chunk size as needed
@@ -89,4 +102,3 @@ async function typeWriter(element, text) {
         }
     }
 }
-
