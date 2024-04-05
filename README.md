@@ -22,7 +22,7 @@ ConverseGPT is currently compatible with macOS, Windows, Linux and utilizes Olla
 
 ## Testing And Building The Project
 - **Test**: npm run start
-- 
+   
 ## What's Next
 
 - [ ] Multimodal language support, allowing the interface to process images.
