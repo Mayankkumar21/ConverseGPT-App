@@ -10,7 +10,7 @@ A demo is available on the [website](https://converse-gpt.vercel.app).
 ConverseGPT is currently compatible with macOS, Windows, Linux and utilizes Ollama for its operation. Follow the steps below to get started:
 
 1. **Download Ollama:** Visit [https://ollama.com/](https://ollama.com/) to download the Ollama software.
-2. **Install a Local LLM:** Use the command `ollama pull model_name` in your terminal to install the local LLM you wish to use.
+2. **Install a Local LLM:** Use the command `ollama pull model_name` in your terminal to install the local LLM you wish to use from [here](https://ollama.com/library).
 3. **Verify Ollama is Running:** Ensure that the Ollama application is running correctly. You should see the Ollama logo displayed in your top bar.
 4. **Download ConverseGPT** 
 5. **Launch ConverseGPT:** After downloading directly launch the app.
